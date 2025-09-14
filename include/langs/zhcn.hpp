@@ -71,7 +71,7 @@ namespace ZHCN {
 		"删除补丁",
 		"补丁已成功删除.",
 		"这可能需要最多30秒.",
-		"正在下载游戏配置文件",
+		"下载游戏配置文件",
 		"正在从Warehouse内查找配置文件...\n完成前将不能退出!",
 		"杂项",
 		"暂停后台游戏",
@@ -189,4 +189,5 @@ namespace ZHCN {
 
 	static_assert(teslaStrings.size() == 2);
 	static_assert(strings.size() == 131);
+
 }
