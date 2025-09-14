@@ -392,7 +392,7 @@ void downloadPatch(void*) {
 			return;
 		}
 
-		snprintf(download_path, sizeof(download_path), "https://raw.githubusercontent.com/masagrator/FPSLocker-Warehouse/v4/SaltySD/plugins/FPSLocker/patches/%016lX/%016lX.yaml", TID, BID);
+		snprintf(download_path, sizeof(download_path), "https://dl.awa.cool/scy/FPSLocker-Warehouse/SaltySD/plugins/FPSLocker/patches/%016lX/%016lX.yaml", TID, BID);	//切换国内源
         curl_easy_setopt(curl, CURLOPT_URL, download_path);
         curl_easy_setopt(curl, CURLOPT_USERAGENT, "Mozilla/5.0");
         curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
@@ -487,7 +487,7 @@ void downloadPatch(void*) {
 					for (size_t i = 0; i < LOCK::tree["Addons"].num_children(); i++) {
 						std::string temp = "";
 						LOCK::tree["Addons"][i] >> temp;
-						std::string dpath = "https://raw.githubusercontent.com/masagrator/FPSLocker-Warehouse/v4/" + temp;
+						std::string dpath = "https://dl.awa.cool/scy/FPSLocker-Warehouse/" + temp;	//切换国内源
 						std::string path = "sdmc:/" + temp;
 						strncpy(&download_path[0], dpath.c_str(), 255);
 						strncpy(&file_path[0], path.c_str(), 191);
@@ -511,7 +511,7 @@ void downloadPatch(void*) {
 		}
 		else if (temp_error_code == 0x404) {
 			error_code = 0x404;
-			curl_easy_setopt(curl, CURLOPT_URL, "https://raw.githubusercontent.com/masagrator/FPSLocker-Warehouse/v4/README.md");
+			curl_easy_setopt(curl, CURLOPT_URL, "https://dl.awa.cool/scy/FPSLocker-Warehouse/README.md");	//切换国内源
 			fp = fopen("sdmc:/SaltySD/plugins/FPSLocker/patches/README.md", "wb+");
 			if (!fp) {
 				curl_easy_cleanup(curl);
