@@ -6,7 +6,7 @@ namespace ZHCN {
 		"删除设置",
 		"删除补丁",
 		"SaltyNX没有运行!",
-		"在sdcard内未检查到NX-FPS插件!",
+		"在TF卡内未检查到NX-FPS插件!",
 		"游戏未运行!",
 		"全部游戏",
 		"所有游戏",
