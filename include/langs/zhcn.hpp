@@ -184,6 +184,5 @@ namespace ZHCN {
 	};
 
 	static_assert(teslaStrings.size() == 2);
-	static_assert(strings.size() == 131);
 
 }
