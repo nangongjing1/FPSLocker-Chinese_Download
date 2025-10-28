@@ -1,4 +1,11 @@
+#ifdef __SWITCH__
 #include <switch.h>
+#else
+#include <cstdint>
+typedef uint32_t Result;
+#define R_FAILED(res)      ((res)!=0)
+#define R_SUCCEEDED(res)   ((res)==0)
+#endif
 #include "asmjit/a64.h"
 #include <string>
 #include <array>
@@ -799,14 +806,9 @@ namespace ASM {
 				return 0;
 			}
 			int64_t address = 0;
-			bool relative = false;
-			if (inst.c_str()[0] == '+' || inst.c_str()[0] == '-') {
-				relative = true;
-			}
-			else if (!adjust_type) adjust_type = 5;
+			if (!adjust_type && !(inst.c_str()[0] == '+' || inst.c_str()[0] == '-')) adjust_type = 5;
 			bool passed = getInteger(inst, &address);
 			if (!passed) return 0xFF0067;
-			if (relative && adjust_type == 4) address += m_pc_address;
 			a.bl(address);
 
 		}
@@ -1261,7 +1263,7 @@ namespace ASM {
 		return 0;
 	}
 
-	template <typename T> Result FMINNM(T entry_impl, uint8_t type = 0) {
+	template <typename T> Result FMINNM(T entry_impl) {
 		asmjit::a64::Assembler a(&code);
 		std::string inst;
 		if (entry_impl.num_children() != 4)
