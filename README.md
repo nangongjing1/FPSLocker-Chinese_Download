@@ -11,7 +11,7 @@ Max supported YAML size is 32kB, though it can be expanded in the next updates.
 
 # Requirements
 - [Atmosphere CFW](https://github.com/Atmosphere-NX/Atmosphere/releases)
-- [My fork of SaltyNX, version 1.5.2+](https://github.com/masagrator/SaltyNX/releases)
+- [My fork of SaltyNX, version 1.5.6+](https://github.com/masagrator/SaltyNX/releases)
 - Tesla environment: [ovlloader](https://github.com/WerWolv/nx-ovlloader/releases) + [Tesla Menu](https://github.com/WerWolv/Tesla-Menu/releases)
 - Overclocking toolset (And don't expect to run games in docked mode at locked 60 FPS without ridiculously beefy clocks, no - 1963/998/2133 clocks are not beefy enough in most cases)
 
@@ -51,13 +51,13 @@ The best approach if you want to run 30 FPS games at higher FPS:
   - `Convert config to patch file` - if proper config file exists for this game and version, you will get an option to convert it to patch file that will be loaded when you will run this game next time. Patch is saved to `SaltySD/plugins/FPSLocker/patches/*titleid_uppercase*/*buildid_uppercase*.bin`
   - `Delete patch file` - if proper config file exists for this game and version, you will get an option to delete patch file so it won't be loaded when you will run this game next time.
   - `Check/download config file` - Checks in Warehouse repository if config for this game and version exists. If exists, it is downloaded and also checked if it's the same as the one on sdcard. If it's not, overlay will remove existing patch and config file, and user must manually convert new config to patch file. 0x312 error means we got unexpected file from github. Any other error code means that something is happening with your connection or github server.
-  - `Halt unfocused game` - Some games are not suspended when your Switch is in home menu. Enabling this option moves into infinite loop game's thread responsible for pushing frames to display when in home menu. Enabling this option can cause various issues depending on game, so be sure to not use it frivolously.
+  - `Halt unfocused game` - Some games are not suspended when your Switch is in home menu. Enabling this option forces kernel to suspend game asap if game is out of focus.
 - `Display settings` - submenu related to display refresh rate. Consists of:
   - `Increase refresh rate` - Shows up only in handheld mode. Change display refresh rate up to 60 Hz.
   - `Decrease refresh rate` - Shows up only in handheld mode. Change display refresh rate down to 40 Hz (for OLED to 45 Hz). 
   - `Change refresh rate` - Shows up only in docked mode. Choose display refresh rate from list.
   - `Handheld Display Sync`/`Docked Display Sync` - When turned on, all three options above are not available, display refresh rate is changed only when game is running, and matches refresh rate with FPS Target.
-  - `60 HZ in HOME Menu` - if Handheld Display Sync is turned on, whenever you go to HOME Menu while game is running SaltyNX will always make sure to run it at 60 Hz in handheld. In some games that utilize PlayReport constantly (f.e. Balatro) this can cause increased Core #3 Usage resulting in worse SaltyNX responsiveness.
+  - `60 HZ in HOME Menu` - if Handheld Display Sync is turned on, whenever you go to HOME Menu while game is running SaltyNX will always make sure to run it at 60 Hz in handheld.
   - `Retro Remake Mode` - this option shows only for people that use Lite with screen `InnoLux 2J055IA-27A (Rev B1)` or `Retro Remake SUPER5` (first revision only). That is because Retro Remake displays require special approach to change refresh rate, and first version of SUPER5 is spoofing ID of already existing display, which makes it impossible to detect which one is in use, so user must manually enable it if they are using SUPER5 display. All other Retro Remake displays are detected automatically.
   - `Docked Settings` - submenu related to display refresh rate of external displays. Not accessible for Lite units. Consists of:
       - `myDP link rate` - It will report `HBR` or `HBR2` mode. HBR mode doesn't allow going higher than 75 Hz at 1080p. More at the bottom of readme.
@@ -69,7 +69,7 @@ The best approach if you want to run 30 FPS games at higher FPS:
       - `Additional settings` - submenu with options related to how FPSLocker/FPSLocker patches are working in docked mode. Currently you can choose from:
           - `Allow patches to force 60 Hz` - some FPSLocker patches are forcing 60 Hz to fix framepacing issues with 30 FPS cutscenes. When such change happens, game is paused for 4 seconds before continuing. By default is turned on. Turning it off will apply only FPS lock without changing refresh rate and without delay.
           - `Use lowest refresh rate for unmatched FPS targets` - For example for 60 Hz display 35 FPS target may not have avaialble refresh rate matching it. By enabling this option you will get lowest enabled refresh rate in `Allowed refresh rates` menu. This option is disabled by default, which will result in setting 60 Hz in that case.
-          - `60 HZ in HOME Menu` - if Docked Display Sync is turned on, whenever you go to HOME Menu while game is running SaltyNX will always make sure to run it at 60 Hz for this particular display. In some games that utilize PlayReport constantly (f.e. Balatro) this can cause increased Core #3 Usage resulting in worse SaltyNX responsiveness.
+          - `60 HZ in HOME Menu` - if Docked Display Sync is turned on, whenever you go to HOME Menu while game is running SaltyNX will always make sure to run it at 60 Hz for this particular display.
 
 > When game is not running
 
