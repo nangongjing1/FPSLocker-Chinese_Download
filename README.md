@@ -11,7 +11,7 @@ Max supported YAML size is 32kB, though it can be expanded in the next updates.
 
 # Requirements
 - [Atmosphere CFW](https://github.com/Atmosphere-NX/Atmosphere/releases)
-- [My fork of SaltyNX, version 1.5.6+](https://github.com/masagrator/SaltyNX/releases)
+- [My fork of SaltyNX, version 1.5.9+](https://github.com/masagrator/SaltyNX/releases)
 - Tesla environment: [ovlloader](https://github.com/WerWolv/nx-ovlloader/releases) + [Tesla Menu](https://github.com/WerWolv/Tesla-Menu/releases)
 - Overclocking toolset (And don't expect to run games in docked mode at locked 60 FPS without ridiculously beefy clocks, no - 1963/998/2133 clocks are not beefy enough in most cases)
 
@@ -32,7 +32,7 @@ The best approach if you want to run 30 FPS games at higher FPS:
 2. Go to Advanced Settings, if you see "Set/Active/Available buffers: 2/2/3", press on `Set buffering`, choose `Triple (force)`.
 
 **Explanation of each option and information**:
-- `Interval Mode` - It's used by NVN API to set the limiter to either 30 FPS (2) or 60 FPS (1) (sporadically to 20 FPS (3) and 15 FPS (4)). 
+- `Interval Mode` - It's used by NVN and EGL API to set vsync. Value 2 means that every frame shows at least 2x longer than by default, so at 60 Hz display you get 30 FPS max. Accepted range is 1-4. Unset value reported as 0 is treated the same way as 1.
 - `Custom FPS Target` - It's used to lock the game to a certain FPS. If the game is using engine proprietary FPS locks, it may not be able to unlock more than 30 FPS without additional patches.
 - `FPS` - It shows how many frames have passed in the last second for the currently running game. This is to confirm that the lock is working as expected.
 - `Patch file doesn't exist.` - It shows up when overlay is 100% sure that for FPSLocker to properly work in this specific game it needs FPSLocker patch, but you don't have one. Read `tl;dr` how to get config and convert it to patch (though config may not exist for your game generally or for specific game's version you are using).
@@ -86,7 +86,7 @@ You will have two submenus to choose from (if you are using OLED model, you will
 
 I want to use this space to clarify a few things.<br>
 
-Switch OLED displays require gamma color correction after changing the refresh rate. I am modifying OLED panel registers to adjust the gamma curve to be as close to the original experience as possible. But because those registers have very big steps, it's not possible to do it perfectly, so there are small discrepancies in colors (The worst case I found is 60% brightness at 45 Hz), additionally the lower refresh rate the lower max brightness, that's how register responsible for tweaking gamma at max brightness works for some reason.<br>
+Switch OLED displays require gamma color correction after changing the refresh rate. I am modifying OLED panel registers to adjust the gamma curve to be as close to the original experience as possible. But because those registers have very big steps, it's not possible to do it perfectly, so there are small discrepancies in colors (The worst case I found is 60% brightness at 45 Hz).<br>
 
 From all reports I got, only one LCD screen was getting an issue with small flickering in the left bottom corner when running at 40 Hz (they were using `InnoLux P062CCA-AZ2`, but there were other users who also got this display and had no issues at 40 Hz - me included). No other issues were found.<br>
 
@@ -99,8 +99,6 @@ LCD can be overclocked up to 70 Hz without immediately visible issues, but I hav
 If Display Sync is turned off, the custom refresh rate is not restored after sleep mode.
 
 Changing the refresh rate affects the animations' speed of OS and Tesla overlays, making them more sluggish at lower refresh rates.
-
-Adding support for custom display refresh rate required changing how game configs are written, so you are advised to redownload all FPSLocker Warehouse configs if you want them to properly support custom refresh rates.
 
 I am not taking any responsibility for damages occurring from changing the refresh rate. Each time you go to `Display settings`, you will be welcomed by a prompt with a warning that you - the user - are taking full responsibility. You must choose `Accept` to go further.
 
