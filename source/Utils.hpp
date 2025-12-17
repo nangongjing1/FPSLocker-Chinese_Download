@@ -708,19 +708,22 @@ void downloadPatch(void*) {
 		error_code = 0x316;
 		return;
 	}
-
+	
+	// Socket 初始化配置（优化内存占用，避免 4MB ovlloader 崩溃）
 	static const SocketInitConfig socketInitConfig = {
+		// TCP 缓冲区
+        .tcp_tx_buf_size = 16 * 1024,				// 发送缓冲区 16KB
+        .tcp_rx_buf_size = 16 * 1024,				// 接收缓冲区 16KB
+        .tcp_tx_buf_max_size = 64 * 1024,			// 最大发送缓冲区 64KB
+        .tcp_rx_buf_max_size = 64 * 1024,			// 最大接收缓冲区 64KB
 
-        .tcp_tx_buf_size = 0x8000,
-        .tcp_rx_buf_size = 0x8000,
-        .tcp_tx_buf_max_size = 0x80000,
-        .tcp_rx_buf_max_size = 0x80000,
+		// UDP 缓冲区
+        .udp_tx_buf_size = 512,						// 发送缓冲区 512B
+        .udp_rx_buf_size = 512,						// 接收缓冲区 512B
 
-        .udp_tx_buf_size = 0,
-        .udp_rx_buf_size = 0,
-
-        .sb_efficiency = 1,
-		.bsd_service_type = BsdServiceType_Auto
+		// 内存效率优先
+        .sb_efficiency = 1,							// 1 = 优先内存效率
+		.bsd_service_type = BsdServiceType_Auto		// 自动选择服务类型
     };
 
 	smInitialize();
