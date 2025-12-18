@@ -709,13 +709,13 @@ void downloadPatch(void*) {
 		return;
 	}
 	
-	// Socket 初始化配置（优化内存占用，避免 4MB ovlloader 崩溃）
+	// Socket 初始化配置 (优化内存占用，避免 4MB ovlloader- 无法下载配置)
 	static const SocketInitConfig socketInitConfig = {
 		// TCP 缓冲区
-        .tcp_tx_buf_size = 16 * 1024,				// 发送缓冲区 16KB
-        .tcp_rx_buf_size = 16 * 1024,				// 接收缓冲区 16KB
-        .tcp_tx_buf_max_size = 64 * 1024,			// 最大发送缓冲区 64KB
-        .tcp_rx_buf_max_size = 64 * 1024,			// 最大接收缓冲区 64KB
+        .tcp_tx_buf_size = 2 * 1024,				// 发送缓冲区 2KB
+        .tcp_rx_buf_size = 32 * 1024,				// 接收缓冲区 32KB
+        .tcp_tx_buf_max_size = 16 * 1024,			// 最大发送缓冲区 16KB
+        .tcp_rx_buf_max_size = 128 * 1024,			// 最大接收缓冲区 128KB
 
 		// UDP 缓冲区
         .udp_tx_buf_size = 512,						// 发送缓冲区 512B
